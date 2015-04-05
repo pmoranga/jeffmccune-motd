@@ -6,7 +6,9 @@
 #
 # [*template*]
 #   Sets the path to the template to use as content for main motd file
-#   If defined, main motd file has: content => content("$template")
+# [*$show_classes*]
+#   Disable ehxibition of classes used by puppet
+#   
 #
 # Actions:
 #
@@ -20,9 +22,10 @@ class motd(
   $puppet_info = true,
   $hardware_info = true,
   $template = 'motd/motd.erb',
+  $show_classes = true,
 ) {
 
-  validate_bool($puppet_info, $hardware_info)
+  validate_bool($puppet_info, $hardware_info, $show_classes)
 
   $motd_group = $::operatingsystem ? {
     solaris => 'sys',
